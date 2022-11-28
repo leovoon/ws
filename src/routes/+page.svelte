@@ -30,11 +30,6 @@
 	};
 </script>
 
-<svelte:head>
-	<link rel="stylesheet" href="./src/pico.min.css" />
-	<link rel="stylesheet" href="./src/global.css" />
-</svelte:head>
-
 <header>
 	<nav>
 		<ul>
@@ -105,7 +100,7 @@
 
 <footer>
 	<p>
-		<small>ws. <sub>v{version}</sub> </small>
+		<small>wsp. <sub>v{version}</sub> </small>
 
 		by
 		<a href="https://github.com/leovoon/ws">
