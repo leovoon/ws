@@ -100,7 +100,7 @@
 
 <footer>
 	<p>
-		<small>wsp. <sub>v{version}</sub> </small>
+		<small>ws. <sub>v{version}</sub> </small>
 
 		by
 		<a href="https://github.com/leovoon/ws">

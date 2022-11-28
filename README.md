@@ -8,7 +8,7 @@
   </a>
    <br />
 
-<h3 align="center"><b>Release</b></h3>
+<h3 align="center"><b>ws.</b></h3>
 
   <p align="center">
     WhatsApp this number.
