@@ -8,7 +8,11 @@
 	let phone = '';
 
 	$: ({ version } = data);
-	$: theme = 'light';
+	$: theme =
+		typeof window !== 'undefined' && window.matchMedia('(prefers-color-scheme: dark)').matches
+			? 'dark'
+			: 'light';
+
 	$: isLight = theme === 'light';
 	$: isDark = theme === 'dark';
 	$: isEmpty = phone === null || phone === undefined || phone === '';
