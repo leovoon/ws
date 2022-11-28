@@ -1,0 +1,16 @@
+/* customized pico.css */
+:root {
+	--primary: #00897b;
+}
+
+body {
+	max-width: 65ch;
+	margin: 0 auto;
+	-webkit-font-smoothing: antialiased;
+}
+
+.logo {
+	font-size: 3.5rem;
+	font-weight: 800;
+	transform: rotate3d(0, 0, 1, -10deg);
+}
