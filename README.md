@@ -25,8 +25,8 @@
 <div align="center">
 
 [![Status](https://img.shields.io/badge/status-active-success.svg)]()
-[![GitHub Issues](https://img.shields.io/github/issues/ws.svg)](https://github.com/ws/issues)
-[![GitHub Pull Requests](https://img.shields.io/github/issues-pr/ws.svg)](https://github.com/ws)
+[![GitHub Issues](https://img.shields.io/github/issues/leovoon/ws)](https://github.com/ws/issues)
+[![GitHub Pull Requests](https://img.shields.io/github/issues-pr/leovoon/ws)](https://github.com/leovoon/ws/pulls)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 
 </div>
