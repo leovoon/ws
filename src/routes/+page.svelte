@@ -17,6 +17,10 @@
 	$: isDark = theme === 'dark';
 	$: isEmpty = phone === null || phone === undefined || phone === '';
 
+	const trimPhoneNumber = (phone: string) => {
+		return phone.toString().replace(/[\s\-\.\(\)\+]|[^0-9]/g, '');
+	};
+
 	const handleToggleTheme = () => {
 		theme = theme === 'light' ? 'dark' : 'light';
 		document.documentElement.setAttribute('data-theme', theme);
@@ -24,13 +28,42 @@
 
 	const handleOnChange = () => {
 		if (!isEmpty) {
-			phone = phone.toString().replace(/[\s\-\.\(\)\+]|[^0-9]/g, '');
+			phone = trimPhoneNumber(phone);
 		}
 		return;
 	};
 
 	const handleOnKeyDown = (e: { key: string; preventDefault: () => any }) => {
 		return (e.key === '.' || e.key === '+' || e.key === '-') && e.preventDefault();
+	};
+
+	const handlePasteNumber = async () => {
+		try {
+			const permission = await navigator.permissions.query({ name: 'clipboard-read' });
+			if (permission.state === 'denied') {
+				throw new Error('Not allowed to read clipboard.');
+			}
+			const clipboardContents = await navigator.clipboard.read();
+			for (const item of clipboardContents) {
+				if (!item.types.includes('text/plain')) {
+					alert('Unsupported type of value in clipboard.');
+					return;
+				}
+				const blob = await item.getType('text/plain');
+				if (!blob) {
+					alert('No value in clipboard.');
+					return;
+				}
+				const text = await blob.text();
+				phone = trimPhoneNumber(text);
+				if (!phone) {
+					alert('No number in clipboard.');
+					return;
+				}
+			}
+		} catch (error: any) {
+			console.error(error.message);
+		}
 	};
 </script>
 
@@ -77,7 +110,7 @@
 					}}
 				>
 					<fieldset>
-						<label for="phone">
+						<label class="phone" for="phone">
 							<input
 								type="number"
 								bind:value={phone}
@@ -87,9 +120,12 @@
 								min="0"
 								id="phone"
 								name="phone"
-								placeholder="Phone no.  e.g. 60161234567"
+								placeholder="e.g. 60161234567"
 								required
 							/>
+							<button on:click={handlePasteNumber} type="button" class=" secondary paste-btn"
+								>Paste
+							</button>
 						</label>
 					</fieldset>
 
@@ -119,6 +155,33 @@
 </footer>
 
 <style>
+	/* Chrome, Safari, Edge, Opera */
+	input::-webkit-outer-spin-button,
+	input::-webkit-inner-spin-button {
+		-webkit-appearance: none;
+		margin: 0;
+	}
+
+	/* Firefox */
+	input[type='number'] {
+		-moz-appearance: textfield;
+	}
+
+	label.phone {
+		position: relative;
+		display: flex;
+
+		align-items: center;
+	}
+
+	label.phone .paste-btn {
+		align-self: center;
+		width: max-content;
+		margin-left: 0.1rem;
+		margin-bottom: var(--spacing);
+		margin-top: calc(var(--spacing) * 0.25);
+	}
+
 	footer > p {
 		text-align: center;
 	}
