@@ -37,6 +37,10 @@
 		return (e.key === '.' || e.key === '+' || e.key === '-') && e.preventDefault();
 	};
 
+	const handleClearNumber = () => {
+		phone = '';
+	};
+
 	const handlePasteNumber = async () => {
 		try {
 			const permission = await navigator.permissions.query({ name: 'clipboard-read' });
@@ -123,8 +127,11 @@
 								placeholder="e.g. 60161234567"
 								required
 							/>
-							<button on:click={handlePasteNumber} type="button" class=" secondary paste-btn"
-								>Paste
+							<button
+								on:click={isEmpty ? handlePasteNumber : handleClearNumber}
+								type="button"
+								class=" secondary paste-btn"
+								>{isEmpty ? 'Paste' : 'Clear'}
 							</button>
 						</label>
 					</fieldset>
